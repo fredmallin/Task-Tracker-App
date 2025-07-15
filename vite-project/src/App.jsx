@@ -6,14 +6,14 @@ import TaskList from "./components/TaskList";
 function App() {
   const [tasks, setTasks] = useState([]);
 
-  // Fetch tasks from db.json
+
   useEffect(() => {
     fetch("http://localhost:3000/tasks")
       .then((res) => res.json())
       .then((data) => setTasks(data));
   }, []);
 
-  // Add task to state
+
   const handleAddTask = (newTask) => {
     setTasks((prevTasks) => [...prevTasks, newTask]);
   };

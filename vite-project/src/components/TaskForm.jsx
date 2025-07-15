@@ -12,10 +12,10 @@ function TaskForm({ onAddTask }) {
       completed: false,
     };
 
-    // Prevent empty input
+    
     if (newTask.title === "") return;
 
-    // Post to db.json via json-server
+    
     fetch("http://localhost:3000/tasks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -23,8 +23,8 @@ function TaskForm({ onAddTask }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        onAddTask(data);  // update task list in App
-        setTitle("");     // clear input
+        onAddTask(data); 
+        setTitle("");    
       });
   };
 
