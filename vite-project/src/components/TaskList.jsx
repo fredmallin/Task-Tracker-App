@@ -1,18 +1,15 @@
+
 import React from "react";
 
-function TaskList({ tasks, onDelete, onToggle }) {
+function TaskList({ tasks }) {
+  if (!tasks || tasks.length === 0) {
+    return <p>No tasks yet</p>;
+  }
+
   return (
     <ul>
-      {tasks.map(task => (
-        <li key={task.id}>
-          <span
-            style={{ textDecoration: task.completed ? "line-through" : "none", cursor: "pointer" }}
-            onClick={() => onToggle(task.id, task.completed)}
-          >
-            {task.title}
-          </span>
-          <button onClick={() => onDelete(task.id)}></button>
-        </li>
+      {tasks.map((task) => (
+        <li key={task.id}>{task.title}</li>
       ))}
     </ul>
   );

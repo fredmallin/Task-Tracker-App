@@ -1,19 +1,31 @@
+
 import React, { useState } from "react";
 
-function TaskForm({ onAdd }) {
+function TaskForm({ onAddTask }) {
   const [title, setTitle] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (title.trim() === "") return;
 
     const newTask = {
-      title,           
-      completed: false
+      title: title.trim(),
+      completed: false,
     };
 
-    onAdd(newTask);
-    setTitle(""); // Clear input
+    // Prevent empty input
+    if (newTask.title === "") return;
+
+    // Post to db.json via json-server
+    fetch("http://localhost:3000/tasks", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newTask),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        onAddTask(data);  // update task list in App
+        setTitle("");     // clear input
+      });
   };
 
   return (
